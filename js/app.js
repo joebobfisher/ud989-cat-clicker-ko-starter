@@ -34,11 +34,14 @@ var Cat = function() {
 }
 
 var ViewModel = function() {
+  // "self" is referring to the ViewModel -- otherwise "this" changes within
+  // incrementCounter() because it is within a "with" binding.
+  var self = this;
 
   this.currentCat = ko.observable(new Cat());
 
   this.incrementCounter = function() {
-        this.currentCat().clickCount(this.currentCat().clickCount() + 1);
+        self.currentCat().clickCount(self.currentCat().clickCount() + 1);
     };
 }
 
